@@ -1,0 +1,727 @@
+
+
+M45.Coding Challenges, Assignment Questions
+
+#Coding Challenges on Error Handling and Prototypes
+
+...............................................................
+
+Q1. Double using callback.
+Write a function that takes in an array of integers and a callback function, 
+and returns a new array where each element is doubled using the callback.
+
+Q2. String Manipulation.
+Write a function “manipulateString” that takes in a string and converts the characters to uppercase letters. The
+function should return a callback function “logString” that logs the sentence “The manipulated string is: “ along
+with the manipulated string or the new string to the console.
+
+Q3. Age in Days.
+Write a JavaScript function called ageInDays that accepts an object containing a person's first name, last
+name, and age in years as input. The function should concatenate the first and last name into a single string
+and store it in a variable called fullName. It should then calculate the person's age in days and store it in a
+variable called ageInDays.
+
+The ageInDays function should then return a callback function that logs a message to the console. The
+message should include the person's full name and age in days, and should be in the format: "The person's full
+name is [full name] and their age in days is [age in days]."
+
+Note that the ageInDays function should not log the message to the console directly, but should instead return
+a callback function that can be used to log the message at a later time.
+
+Q4. Arrange in alphabetical order.
+Write a program that accepts a list of objects representing books [ title, author, and year] and a callback
+function. The program should use the map function to create a new list containing only the titles of the books,
+and then pass this new list to the callback function. The callback function should then log the titles to the
+console in alphabetical order.
+
+Q5. Greeting Promise.
+You need to write a function that takes a name as input and returns a promise that resolves with a greeting
+message. The function should greet the person using their name, with a message in the format "Hello, {name}!".
+
+For example, if the input to the function is "Mithun", the promise should resolve with the string "Hello, Mithun!".
+
+Q6. Fetch results asynchronously.
+Write a function that asynchronously fetches data from an API
+[ https://jsonplaceholder.typicode.com/todos/1 ]and logs the result to the console.
+
+Q7. Multiple requests.
+Create an asynchronous function that retrieves data from two different API endpoints: "https://
+jsonplaceholder.typicode.com/todos/1" and "https://jsonplaceholder.typicode.com/posts/1". The first API returns
+a to-do task, while the second API provides post details. The function should combine the results from both APIs
+and log them as an object, where the keys are "todo" and "post", and the corresponding values are the
+responses from the respective APIs.
+
+Q8. Get Data from API and Display it on the browser console.
+Write a JavaScript program that uses the Fetch method to retrieve data from an API, and then logs the data to
+the console. For example, you could use the API at https://jsonplaceholder.typicode.com/posts to retrieve a list
+of posts, and then display them to the browser console.
+
+Q9. Error Handling
+Write a JavaScript program that uses the Fetch method to retrieve data from an API, and then handles errors
+that may occur. For example, you could use the API at https://jsonplaceholder.typicode.com/posts/123456789
+to simulate an error, and then display an error message on the webpage.
+
+...............................................................
+
+Q1. Double using callback.
+Write a function that takes in an array of integers and a callback function, 
+and returns a new array where each element is doubled using the callback.
+
+A.You can achieve this by defining a function that takes an array and a callback function as parameters. The callback function will handle the operation of doubling each element in the array. Here’s how you can implement it:
+
+### Step-by-Step Implementation:
+
+1. **Create the callback function**: This function will take an element as an argument and return the doubled value.
+2. **Create the main function**: This function will iterate through the array, apply the callback function to each element, and return a new array with the results.
+
+### Example Implementation
+
+```javascript
+// Callback function to double a number
+function double(num) {
+    return num * 2;
+}
+
+// Main function to apply callback to each element of the array
+function doubleArray(arr, callback) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+        result.push(callback(arr[i]));
+    }
+    return result;
+}
+
+// Test the function
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = doubleArray(numbers, double);
+
+console.log(doubledNumbers); // Output: [2, 4, 6, 8, 10]
+```
+
+### Explanation:
+
+1. **Callback Function `double(num)`**: 
+   - This function takes a single argument `num` and returns `num * 2`.
+   
+2. **Main Function `doubleArray(arr, callback)`**:
+   - It takes two arguments:
+     - `arr`: The array of integers.
+     - `callback`: The callback function to apply to each element.
+   - It creates an empty array `result` to store the doubled values.
+   - It iterates over each element of `arr` using a `for` loop.
+   - For each element, it applies the `callback` function and pushes the result into the `result` array.
+   - Finally, it returns the `result` array, which contains all the doubled values.
+
+### Output:
+Running the above code with the example `numbers` array `[1, 2, 3, 4, 5]`, you get `[2, 4, 6, 8, 10]` as the output.
+
+You can customize the callback function to perform other operations as well, such as squaring the numbers, halving them, etc.
+
+..........................................................................
+
+Q2. String Manipulation.
+Write a function “manipulateString” that takes in a string and converts the characters to uppercase letters. The
+function should return a callback function “logString” that logs the sentence “The manipulated string is: “ along
+with the manipulated string or the new string to the console.
+
+A.You can achieve this by defining a function `manipulateString` that converts the input string to uppercase and returns a callback function `logString`. The `logString` function will then log the manipulated string along with a custom message to the console.
+
+Here's how you can implement this:
+
+### Implementation
+
+```javascript
+// Function to manipulate the string (convert to uppercase) and return a callback function
+function manipulateString(inputString) {
+    // Convert the input string to uppercase
+    const manipulatedString = inputString.toUpperCase();
+
+    // Define the callback function
+    function logString() {
+        console.log(`The manipulated string is: ${manipulatedString}`);
+    }
+
+    // Return the callback function
+    return logString;
+}
+
+// Example usage
+const input = "hello, world!";
+const logManipulatedString = manipulateString(input);
+logManipulatedString(); // Output: The manipulated string is: HELLO, WORLD!
+```
+
+### Explanation:
+
+1. **Main Function `manipulateString(inputString)`**:
+   - This function takes a single argument, `inputString`, which is the string to be manipulated.
+   - It converts the input string to uppercase using `toUpperCase()` and stores it in `manipulatedString`.
+   - It defines an inner function `logString` that logs the message `"The manipulated string is: "` followed by the manipulated string.
+   - Finally, it returns the `logString` function as the callback.
+
+2. **Example Usage**:
+   - You can call `manipulateString` with the input string `"hello, world!"`.
+   - The returned `logString` function can be invoked to log the manipulated string to the console.
+
+### Output:
+When you run the code with the input `"hello, world!"`, the console will display:
+
+```
+The manipulated string is: HELLO, WORLD!
+```
+
+This approach effectively separates the string manipulation logic from the logging logic, making the code modular and reusable.
+
+.........................................................................
+
+Q3. Age in Days.
+Write a JavaScript function called ageInDays that accepts an object containing a person's first name, last
+name, and age in years as input. The function should concatenate the first and last name into a single string
+and store it in a variable called fullName. It should then calculate the person's age in days and store it in a
+variable called ageInDays.
+
+The ageInDays function should then return a callback function that logs a message to the console. The
+message should include the person's full name and age in days, and should be in the format: "The person's full
+name is [full name] and their age in days is [age in days]."
+
+Note that the ageInDays function should not log the message to the console directly, but should instead return
+a callback function that can be used to log the message at a later time.
+
+A.You can implement the `ageInDays` function by following these steps:
+
+1. Concatenate the first name and last name into `fullName`.
+2. Calculate the age in days and store it in `ageInDays`.
+3. Return a callback function that logs the message with the full name and age in days.
+
+Here’s how you can do it:
+
+### Implementation
+
+```javascript
+function ageInDays(person) {
+    // Step 1: Concatenate the first and last name
+    const fullName = `${person.firstName} ${person.lastName}`;
+
+    // Step 2: Calculate the age in days
+    const ageInDays = person.age * 365; // Approximation (ignores leap years)
+
+    // Step 3: Return a callback function
+    return function() {
+        console.log(`The person's full name is ${fullName} and their age in days is ${ageInDays}.`);
+    };
+}
+
+// Example usage
+const person = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 25
+};
+
+const logAgeInDays = ageInDays(person);
+logAgeInDays(); // Output: The person's full name is John Doe and their age in days is 9125.
+```
+
+### Explanation:
+
+1. **Main Function `ageInDays(person)`**:
+   - It takes an object `person` as input containing `firstName`, `lastName`, and `age`.
+   - It concatenates `firstName` and `lastName` into a single string `fullName`.
+   - It calculates `ageInDays` by multiplying the age by 365. This is a simple approximation that doesn't account for leap years.
+   - Finally, it returns a callback function that, when invoked, logs the message to the console.
+
+2. **Example Usage**:
+   - You create an object `person` with the necessary properties.
+   - You call `ageInDays` with this object, which returns a function.
+   - When you invoke the returned function, it logs the message with the person's full name and age in days.
+
+### Output:
+When you run the code with the example `person` object, the console will display:
+
+```
+The person's full name is John Doe and their age in days is 9125.
+```
+
+This approach allows you to calculate and log the person's age in days at a later time, providing flexibility in when the message is displayed.
+
+.........................................................................
+
+Q4. Arrange in alphabetical order.
+Write a program that accepts a list of objects representing books [ title, author, and year] and a callback
+function. The program should use the map function to create a new list containing only the titles of the books,
+and then pass this new list to the callback function. The callback function should then log the titles to the
+console in alphabetical order.
+
+A.You can achieve this task by following these steps:
+
+1. Use the `map` function to extract the titles from the list of book objects.
+2. Pass the list of titles to a callback function that sorts them alphabetically and logs them to the console.
+
+### Implementation
+
+```javascript
+function getBookTitles(books, callback) {
+    // Step 1: Use the map function to create a list of book titles
+    const titles = books.map(book => book.title);
+
+    // Step 2: Pass the titles to the callback function
+    callback(titles);
+}
+
+function logTitlesAlphabetically(titles) {
+    // Sort the titles alphabetically
+    titles.sort();
+
+    // Log the sorted titles to the console
+    console.log("Book titles in alphabetical order:");
+    titles.forEach(title => console.log(title));
+}
+
+// Example usage
+const books = [
+    { title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960 },
+    { title: "1984", author: "George Orwell", year: 1949 },
+    { title: "The Great Gatsby", author: "F. Scott Fitzgerald", year: 1925 },
+    { title: "The Catcher in the Rye", author: "J.D. Salinger", year: 1951 }
+];
+
+getBookTitles(books, logTitlesAlphabetically);
+```
+
+### Explanation:
+
+1. **Main Function `getBookTitles(books, callback)`**:
+   - It accepts an array of `books` and a `callback` function as arguments.
+   - It uses the `map` function to create a new array `titles`, which contains only the `title` of each book.
+   - It then passes this `titles` array to the `callback` function.
+
+2. **Callback Function `logTitlesAlphabetically(titles)`**:
+   - It sorts the array of titles alphabetically using `sort()`.
+   - It logs each title to the console in alphabetical order.
+
+3. **Example Usage**:
+   - A list of `books` is created, each with `title`, `author`, and `year` properties.
+   - `getBookTitles` is called with the `books` list and the `logTitlesAlphabetically` function as arguments.
+
+### Output:
+When you run the code with the provided `books` list, the console will display:
+
+```
+Book titles in alphabetical order:
+1984
+The Catcher in the Rye
+The Great Gatsby
+To Kill a Mockingbird
+```
+
+This program successfully extracts the titles, sorts them alphabetically, and logs them to the console using the callback function.
+
+..........................................................................
+
+Q5. Greeting Promise.
+You need to write a function that takes a name as input and returns a promise that resolves with a greeting
+message. The function should greet the person using their name, with a message in the format "Hello, {name}!".
+
+For example, if the input to the function is "Mithun", the promise should resolve with the string "Hello, Mithun!".
+
+A.You can create a function that returns a promise resolving with a greeting message by following these steps:
+
+### Implementation
+
+```javascript
+function greet(name) {
+    return new Promise((resolve, reject) => {
+        if (name) {
+            // If the name is provided, resolve the promise with a greeting message
+            resolve(`Hello, ${name}!`);
+        } else {
+            // If no name is provided, reject the promise with an error message
+            reject("Name is required to generate a greeting.");
+        }
+    });
+}
+
+// Example usage
+greet("Mithun")
+    .then(message => console.log(message))  // Expected output: "Hello, Mithun!"
+    .catch(error => console.error(error));
+```
+
+### Explanation:
+
+1. **Function `greet(name)`**:
+   - This function accepts a `name` as an input.
+   - It returns a new `Promise`. 
+   - Inside the `Promise`, if the `name` is provided, it calls the `resolve` function with a greeting message (`"Hello, ${name}!"`).
+   - If no `name` is provided, it calls the `reject` function with an error message.
+
+2. **Using the Promise**:
+   - The function is called with the name "Mithun".
+   - The `then` method is used to handle the resolved promise, and it logs the greeting message.
+   - The `catch` method is used to handle any errors if the promise is rejected.
+
+### Output:
+
+If the function is called with `"Mithun"` as the input, the console will display:
+
+```
+Hello, Mithun!
+```
+
+If the function is called without a name, the promise will be rejected, and the `catch` block will log the error.
+
+.........................................................................
+
+Q6. Fetch results asynchronously.
+Write a function that asynchronously fetches data from an API
+[ https://jsonplaceholder.typicode.com/todos/1 ]and logs the result to the console.
+
+A.To fetch data asynchronously from an API, you can use the `fetch` function along with `async/await` to handle the asynchronous nature of the request. Below is an example of how you can do this:
+
+### Implementation
+
+```javascript
+async function fetchData() {
+    try {
+        // Asynchronously fetch data from the API
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+        
+        // Check if the response is OK (status code 200-299)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // Parse the JSON from the response
+        const data = await response.json();
+        
+        // Log the result to the console
+        console.log(data);
+    } catch (error) {
+        // Handle any errors that occurred during the fetch
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
+
+// Call the fetchData function
+fetchData();
+```
+
+### Explanation:
+
+1. **Function `fetchData()`**:
+   - This function is declared as `async` to allow the use of `await` inside it.
+   - The `fetch` function is used to send an HTTP GET request to the provided URL (`https://jsonplaceholder.typicode.com/todos/1`).
+   - `await` is used to wait for the fetch operation to complete and store the response.
+   - The response is checked to ensure it's OK (status code in the range 200-299). If not, an error is thrown.
+   - If the response is OK, the `json()` method is used to parse the response body as JSON.
+   - The parsed data is then logged to the console.
+
+2. **Error Handling**:
+   - If any errors occur during the fetch operation (e.g., network issues, invalid JSON), they are caught by the `catch` block and logged to the console.
+
+### Output:
+
+When you run this function, it will log the fetched data to the console, which looks like this:
+
+```json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+```
+
+This shows that the function successfully fetched and logged the data from the API.
+
+.........................................................................
+
+Q7. Multiple requests.
+Create an asynchronous function that retrieves data from two different API endpoints: "https://
+jsonplaceholder.typicode.com/todos/1" and "https://jsonplaceholder.typicode.com/posts/1". The first API returns
+a to-do task, while the second API provides post details. The function should combine the results from both APIs
+and log them as an object, where the keys are "todo" and "post", and the corresponding values are the
+responses from the respective APIs.
+
+A.To accomplish this task, you can use the `async/await` syntax to handle multiple asynchronous requests. The function will fetch data from both APIs, wait for both requests to complete, and then combine the results into a single object. Here's how you can do it:
+
+### Implementation
+
+```javascript
+async function fetchMultipleRequests() {
+    try {
+        // Initiate both API requests concurrently
+        const [todoResponse, postResponse] = await Promise.all([
+            fetch('https://jsonplaceholder.typicode.com/todos/1'),
+            fetch('https://jsonplaceholder.typicode.com/posts/1')
+        ]);
+
+        // Check if both responses are OK (status code 200-299)
+        if (!todoResponse.ok || !postResponse.ok) {
+            throw new Error('One or both network responses were not ok');
+        }
+
+        // Parse both responses as JSON
+        const todoData = await todoResponse.json();
+        const postData = await postResponse.json();
+
+        // Combine the results into an object
+        const combinedResult = {
+            todo: todoData,
+            post: postData
+        };
+
+        // Log the combined result to the console
+        console.log(combinedResult);
+    } catch (error) {
+        // Handle any errors that occurred during the fetch
+        console.error('There was a problem with the fetch operations:', error);
+    }
+}
+
+// Call the function to fetch and log the combined results
+fetchMultipleRequests();
+```
+
+### Explanation:
+
+1. **Function `fetchMultipleRequests()`**:
+   - The function is declared as `async` to enable the use of `await` within it.
+   - It initiates two `fetch` requests concurrently using `Promise.all()`. This method runs both fetch requests in parallel, and the function waits until both requests are resolved.
+   - The responses from both APIs are stored in the `todoResponse` and `postResponse` variables.
+
+2. **Response Validation**:
+   - The code checks whether both responses are OK. If either of the responses is not OK (status code outside 200-299), an error is thrown.
+
+3. **JSON Parsing**:
+   - The `json()` method is used to parse the responses from both APIs.
+
+4. **Combining Results**:
+   - The results from both APIs are combined into an object with two keys: `todo` and `post`, corresponding to the fetched data from the two APIs.
+
+5. **Error Handling**:
+   - Any errors encountered during the fetching or processing of the API responses are caught by the `catch` block and logged to the console.
+
+6. **Logging**:
+   - The final combined result is logged to the console.
+
+### Output:
+
+When the function runs successfully, it logs an object that looks like this:
+
+```json
+{
+  "todo": {
+    "userId": 1,
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+  },
+  "post": {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit..."
+  }
+}
+```
+
+This output shows the combined data from the two APIs, neatly organized into a single object.
+
+.........................................................................
+
+Q8. Get Data from API and Display it on the browser console.
+Write a JavaScript program that uses the Fetch method to retrieve data from an API, and then logs the data to
+the console. For example, you could use the API at https://jsonplaceholder.typicode.com/posts to retrieve a list
+of posts, and then display them to the browser console.
+
+A.You can use the `fetch` method in JavaScript to retrieve data from an API and then log it to the browser console. Here's how you can do it with the provided API:
+
+### Implementation
+
+```javascript
+// Function to fetch data from the API and log it to the console
+function fetchAndLogPosts() {
+    // Use the fetch method to make an HTTP GET request to the API
+    fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => {
+            // Check if the response is OK (status code 200-299)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // Parse the response as JSON
+            return response.json();
+        })
+        .then(data => {
+            // Log the retrieved data to the browser console
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle any errors that occurred during the fetch
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+// Call the function to fetch and log the posts
+fetchAndLogPosts();
+```
+
+### Explanation:
+
+1. **Function `fetchAndLogPosts()`**:
+   - This function is designed to fetch data from the API endpoint and then log that data to the browser console.
+
+2. **Fetch Method**:
+   - The `fetch` method is used to make an HTTP GET request to the `https://jsonplaceholder.typicode.com/posts` API.
+
+3. **Response Handling**:
+   - The first `.then()` block checks if the response is OK. If the response is not OK (status code not between 200-299), an error is thrown.
+   - The response is then parsed into JSON format using `response.json()`.
+
+4. **Logging the Data**:
+   - The second `.then()` block logs the parsed JSON data (which is an array of post objects) to the console.
+
+5. **Error Handling**:
+   - If any error occurs during the fetch operation (e.g., network issues or invalid URL), it is caught in the `.catch()` block, and an error message is logged to the console.
+
+### Running the Code:
+
+When you run this code in a browser's JavaScript console or in a JavaScript environment, it will fetch a list of posts from the provided API and display them in the console.
+
+### Example Output:
+
+The console will display an array of objects like the following:
+
+```json
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+    "body": "quia et suscipit suscipit... "
+  },
+  {
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum tempore vitae sequi... "
+  },
+  ...
+]
+```
+
+Each object in the array represents a post with properties such as `userId`, `id`, `title`, and `body`.
+
+.........................................................................
+
+Q9. Error Handling
+Write a JavaScript program that uses the Fetch method to retrieve data from an API, and then handles errors
+that may occur. For example, you could use the API at https://jsonplaceholder.typicode.com/posts/123456789
+to simulate an error, and then display an error message on the webpage.
+
+A.You can handle errors in JavaScript when using the `fetch` method by checking the response status and handling exceptions in the `.catch()` block. Below is an example that simulates an error by fetching data from a non-existent endpoint.
+
+### Implementation
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Error Handling</title>
+</head>
+<body>
+    <div id="content">
+        <!-- Error message will be displayed here -->
+    </div>
+
+    <script>
+        // Function to fetch data and handle errors
+        function fetchWithErrorHandling() {
+            // Fetch from a non-existent endpoint to simulate an error
+            fetch('https://jsonplaceholder.typicode.com/posts/123456789')
+                .then(response => {
+                    // Check if the response status is not OK
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok. Status: ' + response.status);
+                    }
+                    // If response is OK, parse the JSON data
+                    return response.json();
+                })
+                .then(data => {
+                    // If successful, log the data (though in this case, it will not be successful)
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Handle any errors that occurred during the fetch
+                    console.error('There was a problem with the fetch operation:', error);
+                    // Display the error message on the webpage
+                    document.getElementById('content').textContent = 'Error: ' + error.message;
+                });
+        }
+
+        // Call the function to fetch data and handle errors
+        fetchWithErrorHandling();
+    </script>
+</body>
+</html>
+```
+
+### Explanation:
+
+1. **HTML Structure**:
+   - A `div` with an `id` of `content` is added to the HTML. This `div` is where any error messages will be displayed.
+
+2. **Fetch Method**:
+   - The `fetch` method is used to request data from a non-existent endpoint: `https://jsonplaceholder.typicode.com/posts/123456789`.
+
+3. **Response Handling**:
+   - The first `.then()` block checks if the response is OK using `response.ok`. If the status is not OK (i.e., the status code is outside the 200-299 range), an error is thrown with a message that includes the response status.
+
+4. **Error Handling**:
+   - The `.catch()` block catches any errors that occur, whether it's due to the response not being OK or any other issue (e.g., network failure).
+   - The error message is then logged to the console and also displayed on the webpage by setting the `textContent` of the `div` with `id="content"`.
+
+### Running the Code:
+
+When you run this code in a browser, it will attempt to fetch data from a non-existent endpoint. Since the endpoint does not exist, the response will not be OK, and an error will be thrown and caught.
+
+### Example Output on the Webpage:
+
+```
+Error: Network response was not ok. Status: 404
+```
+
+This message will be displayed on the webpage, indicating that the request failed due to a 404 status, which means the requested resource could not be found.
+
+.........................................................................
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
